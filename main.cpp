@@ -7,7 +7,7 @@ int main()
 	string salatTimes[7];
     int year = 2015;
     int month = 4;
-    int day = 9;
+    int day = 10;
     int calcMethod = 2;
     int asrMethod = 0;
     int highLatitude = 0;

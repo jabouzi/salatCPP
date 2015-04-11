@@ -176,21 +176,21 @@ void Salat::setAsrMethod(int methodID)
 void Salat::setFajrAngle(double angle)
 {
     double customParams[] = {angle, NULL, NULL, NULL, NULL};
-    setCustomParams(customParams);
+    //setCustomParams(customParams);
 }
 
 // set the angle for calculating Maghrib
 void Salat::setMaghribAngle(double angle)
 {
     double customParams[] = {NULL, 0, angle, NULL, NULL};
-    setCustomParams(customParams);
+    //setCustomParams(customParams);
 }
 
 // set the angle for calculating Isha
 void Salat::setIshaAngle(double angle)
 {
     double customParams[] = {NULL, NULL, NULL, 0, angle};
-    setCustomParams(customParams);
+    //setCustomParams(customParams);
 }
 
 // set the minutes after mid-day for calculating Dhuhr
@@ -203,14 +203,14 @@ void Salat::setDhuhrMinutes(int minutes)
 void Salat::setMaghribMinutes(int minutes)
 {
     double customParams[] = {NULL, 1, minutes, NULL, NULL};
-    setCustomParams(customParams);
+    //setCustomParams(customParams);
 }
 
 // set the minutes after Maghrib for calculating Isha
 void Salat::setIshaMinutes(int minutes)
 {
     double customParams[] = {NULL, 1, minutes, NULL, NULL};
-    setCustomParams(customParams);
+    //setCustomParams(customParams);
 }
 
 // set custom values for calculation parameters
