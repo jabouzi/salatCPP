@@ -158,7 +158,7 @@ public:
     
     
     // convert hours to day portions
-    void dayPortion(double*);
+    void dayPortion();
     
     
     

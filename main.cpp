@@ -21,7 +21,7 @@ int main()
     salats->getDatePrayerTimes(year,month,day,latitude,longitude,timezone,salatTimes);
 
 	int numElements = sizeof(salatTimes)/sizeof(salatTimes[0]);
-	for (int i = 0; i < numElements; i++) 
-    	cout << salatTimes[i] << "\n";
+	/*for (int i = 0; i < numElements; i++) 
+    	cout << salatTimes[i] << "\n";*/
     return 0;
 }

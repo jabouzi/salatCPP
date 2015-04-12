@@ -148,6 +148,7 @@ Salat::~Salat()
 // return prayer times for a given date
 void Salat::getDatePrayerTimes(int year, int month, int day, double latitude, double longitude, double timeZone, string * prayerTimes)
 {
+	cout.precision(5);
     //qDebug() << "4 : " << prayerTimes;
     lat = latitude;
     lng = longitude;
@@ -156,6 +157,14 @@ void Salat::getDatePrayerTimes(int year, int month, int day, double latitude, do
     JDate = julianDate(year, month, day)- longitude/ (15* 24);
     //qDebug() << "JDate : " << to_string(JDate,'f',-1);
     computeDayTimes(prayerTimes);
+    /*int numElements = sizeof(prayerTimes)/sizeof(prayerTimes[0]);
+    for (int i = 0; i < 7; i++) 
+    	cout << prayerTimes[i] << "\n";
+    cout << "\n"  << "\n";
+    numElements = sizeof(times)/sizeof(times[0]);
+    for (int i = 0; i < 7; i++) 
+    	cout << times[i] << "\n";
+    cout << fixed << JDate  << "\n";*/
 }
 
 // set the calculation method
@@ -244,9 +253,11 @@ string Salat::floatToTime24(double time)
     if (isNaN(time))
         return InvalidTime;
     else{
-        time = fixhour(time+ 0.5/ 60);  // add 0.5 minutes to round
+    	cout << fixed << "time : " << time << " time + 0.5/ 60 : " << time + 0.5/ 60 << "\n";
+        time = fixhour(time + 0.5/ 60);  // add 0.5 minutes to round
         double hours = floor(time);
         double minutes = floor((time- hours)* 60);
+        cout << fixed << "time : " << time << " hours : " << hours << " minutes : " << minutes << "\n";
         return twoDigitsFormat(hours)+':'+ twoDigitsFormat(minutes);
     }
 }
@@ -278,17 +289,23 @@ string Salat::floatToTime12(double time)
 double Salat::sunPosition(double jd, int flag)
 {
     double D = jd - 2451545.0;
+    cout << fixed << "D : " << D << " jd : " << jd <<  "\n";
     double g = fixangle(357.529 + 0.98560028* D);
+    cout << fixed << "g : " << g <<  "\n";
     double q = fixangle(280.459 + 0.98564736* D);
+    cout << fixed << "q : " << q <<  "\n";
     double L = fixangle(q + 1.915* dsin(g) + 0.020* dsin(2*g));
-    
+    cout << fixed << "L : " << L <<  "\n";
     //double R = 1.00014 - 0.01671* dcos(g) - 0.00014* dcos(2*g);
     double e = 23.439 - 0.00000036* D;
-    
+    cout << fixed << "e : " << e <<  "\n";
     double d = darcsin(dsin(e)* dsin(L));
+    cout << fixed << "d : " << d <<  "\n";
     double RA = darctan2(dcos(e)* dsin(L), dcos(L))/ 15;
+    cout << fixed << "RA : " << RA <<  "\n";
     RA = fixhour(RA);
     double EqT = q/15 - RA;
+    cout << fixed << "EqT : " << EqT <<  "\n";
     //double * result = new double[2];
     if (flag == 0) return d;
     return EqT;
@@ -312,16 +329,19 @@ double Salat::computeMidDay(double t)
 {
     double T = equationOfTime(JDate + t);
     double Z = fixhour(12 - T);
+    cout << "T : " << T << " Z : " << Z << " t : " << t <<  "\n";
     return Z;
 }
 
 // compute time for a given angle G
 double Salat::computeTime(double G, double t)
 {
+	cout << "G : " << G << " t : " << t << "\n";
     double D = sunDeclination(JDate + t);
     double Z = computeMidDay(t);
     double V = 1.0/15.0* darccos((-dsin(G)- dsin(D)* dsin(lat)) /
                                  (dcos(D)* dcos(lat)));
+    cout << "D : " << D << " Z : " << Z << " V : " << V <<  "Result : " << Z + (G > 90.0 ? -V : V) << "\n";
     return Z + (G > 90.0 ? -V : V);
 }
 
@@ -340,7 +360,10 @@ double Salat::computeAsr(int step, double t)  // Shafii: step=1, Hanafi: step=2
 // compute prayer times at given julian date
 void Salat::computeTimes(double * times)
 {
-    dayPortion(times);
+    dayPortion();
+    cout << "TIMES\n";
+    for (int i = 0; i < 7; i++) 
+    	cout << times[i] << "\n";
     double Fajr    = computeTime(180.0 - methodParams[calcMethod][0], times[0]);
     double Sunrise = computeTime(180.0 - 0.833, times[1]);
     double Dhuhr   = computeMidDay(times[2]);
@@ -355,6 +378,10 @@ void Salat::computeTimes(double * times)
     times[4] = Sunset;
     times[5] = Maghrib;
     times[6] = Isha;
+    cout << "TIMES\n";
+    int numElements = sizeof(times)/sizeof(times[0]);
+	for (int i = 0; i < 7; i++) 
+    	cout << times[i] << "\n";
 }
 
 
@@ -362,6 +389,10 @@ void Salat::computeTimes(double * times)
 void Salat::computeDayTimes(string * prayerTimes)
 {
     //qDebug() << "5 : " << prayerTimes;
+    cout << "PRAYER TIMES\n";
+    int numElements = sizeof(prayerTimes)/sizeof(prayerTimes[0]);
+	for (int i = 0; i < numElements; i++) 
+    	cout << prayerTimes[i] << "\n";
     times[0] = 5.0;
     times[1] = 6.0;
     times[2] = 12.0;
@@ -369,7 +400,10 @@ void Salat::computeDayTimes(string * prayerTimes)
     times[4] = 18.0;
     times[5] = 18.0;
     times[6] = 18.0; //default times
-    
+        cout << "TIMES\n";
+
+	for (int i = 0; i < 7; i++) 
+    	cout << times[i] << "\n";
     for (int i=1; i<=numIterations; i++)
         computeTimes(times);
     adjustTimes(times);
@@ -390,7 +424,11 @@ void Salat::adjustTimes(double* times)
     
     if (adjustHighLats != None)
         adjustHighLatTimes(times);
-    
+        
+    cout << "TIMES\n";
+
+	for (int i = 0; i < 7; i++) 
+    	cout << times[i] << "\n";
     //return times;
 }
 
@@ -409,6 +447,10 @@ void Salat::adjustTimesFormat(double* times, string * prayerTimes)
      timesF[i] = floatToTime12(times[i], true);*/
         else
             prayerTimes[i] = floatToTime24(times[i]);
+    cout << "PRAYER TIMES\n";
+
+	for (int i = 0; i < 7; i++) 
+    	cout << prayerTimes[i] << "\n";
     //return timesF;
 }
 
@@ -454,7 +496,7 @@ double Salat::nightPortion(double angle)
 
 
 // convert hours to day portions
-void Salat::dayPortion(double * times)
+void Salat::dayPortion()
 {
     for (int i=0; i<7; i++)
         times[i] /= 24;
@@ -613,8 +655,11 @@ double Salat::fixangle(double a)
 // range reduce hours to 0..23
 double Salat::fixhour(double a)
 {
+	cout << "a : " << a << "\n" ;
     a = a - 24.0 * (floor(a / 24.0));
+    cout << "a : " << a << "\n" ;
     a = a < 0 ? a + 24.0 : a;
+    cout << "a : " << a << "\n" ;
     return a;
 }
 
