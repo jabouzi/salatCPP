@@ -156,7 +156,8 @@ string* Salat::getDatePrayerTimes(int year, int month, int day, double latitude,
     //timeZone = effectiveTimeZone(year, month, day, timeZone);
     JDate = julianDate(year, month, day)- longitude/ (15* 24);
     computeDayTimes();
-    
+    delete[] times;
+    delete[] prayerTimes;
     return prayerTimes;
 }
 
