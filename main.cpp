@@ -23,7 +23,7 @@ int main()
 	int numElements = sizeof(salatTimes)/sizeof(salatTimes[0]);
 	for (int i = 0; i < 7; i++) 
     	cout << salatTimes[i] << "\n";
-    delete[] salatTimes;
+    delete salatTimes;
     delete salat;
     return 0;
 }
