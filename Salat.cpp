@@ -143,8 +143,8 @@ Salat::Salat()
 
 Salat::~Salat()
 {
-    delete times;
-    delete prayerTimes;
+    delete[] times;
+    delete[] prayerTimes;
 }
 
 // return prayer times for a given date
