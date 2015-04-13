@@ -228,7 +228,7 @@ string Salat::floatToTime12(double time)
         int minutes = (((int)time- hours)* 60);
         string suffix = hours >= 12.0 ? " pm" : " am";
         hours = (hours + 12 - 1) % 12 + 1;
-        return to_string(hours)+':'+ twoDigitsFormat(minutes)+ suffix;
+        return _2String(hours)+':'+ twoDigitsFormat(minutes)+ suffix;
     }
 }
 
@@ -428,7 +428,7 @@ double Salat::timeDiff(double time1, double time2)
 // add a leading 0 if necessary
 string Salat::twoDigitsFormat(int num)
 {
-    return (num <10) ? '0'+ to_string(num) : to_string(num);
+    return (num <10) ? '0'+ _2String(num) : _2String(num);
 }
 
 bool Salat::isNaN(double var)
@@ -570,13 +570,27 @@ double Salat::fixhour(double a)
     return a;
 }
 
-void debug(string* array)
+string Salat::_2String(double number)
+{
+	std::ostringstream ostr;
+    ostr << number;
+    return ostr.str();
+}
+
+string Salat::_2String(int number)
+{
+	std::ostringstream ostr;
+    ostr << number;
+    return ostr.str();
+}
+
+void Salat::debug(string* array)
 {
 	int numElements = sizeof(array)/sizeof(array[0]);
 	for (int i = 0; i < numElements; i++) 
     	cout << array[i];
 }
-void debug(int* array)
+void Salat::debug(int* array)
 {
 	int numElements = sizeof(array)/sizeof(array[0]);
 	for (int i = 0; i < numElements; i++) 

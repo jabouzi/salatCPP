@@ -29,6 +29,7 @@
 #include <cmath>
 #include <typeinfo>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -339,6 +340,9 @@ private:
      is : isha selector (0 = angle; 1 = minutes after maghrib)
      iv : isha parameter value (in angle or minutes)
     	*/
+    	
+    string _2String(double);
+    string _2String(int);
     	
     void debug(string*);
     void debug(int*);
