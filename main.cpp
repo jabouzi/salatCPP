@@ -20,10 +20,11 @@ int main()
     salat->setHighLatsMethod(highLatitude);
     salatTimes = salat->getDatePrayerTimes(year,month,day,latitude,longitude,timezone);
 
-	int numElements = sizeof(salatTimes)/sizeof(salatTimes[0]);
+	//int numElements = sizeof(salatTimes)/sizeof(salatTimes[0]);
 	for (int i = 0; i < 7; i++) 
     	cout << salatTimes[i] << "\n";
-    delete[] salatTimes;
     //delete salat;
+    delete[] salatTimes;
+    salatTimes = NULL;
     return 0;
 }
