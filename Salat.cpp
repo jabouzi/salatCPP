@@ -143,8 +143,8 @@ Salat::Salat()
 
 Salat::~Salat()
 {
-    delete[] times;
-    delete[] prayerTimes;
+    delete times;
+    delete prayerTimes;
 }
 
 // return prayer times for a given date
@@ -156,8 +156,7 @@ string* Salat::getDatePrayerTimes(int year, int month, int day, double latitude,
     //timeZone = effectiveTimeZone(year, month, day, timeZone);
     JDate = julianDate(year, month, day)- longitude/ (15* 24);
     computeDayTimes();
-    delete[] times;
-    delete[] prayerTimes;
+
     return prayerTimes;
 }
 
