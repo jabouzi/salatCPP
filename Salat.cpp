@@ -143,8 +143,9 @@ Salat::Salat()
 
 Salat::~Salat()
 {
-    delete times;
-    delete prayerTimes;
+	cout << "DELETING MEMORIES\n";
+    delete[] times;
+    delete[] prayerTimes;
 }
 
 // return prayer times for a given date
