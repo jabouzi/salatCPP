@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	string salatTimes[7];
+	string *salatTimes = new string[7];
     int year = 2015;
     int month = 4;
     int day = 10;
@@ -18,10 +18,11 @@ int main()
     salats->setCalcMethod(calcMethod);
     salats->setAsrMethod(asrMethod);
     salats->setHighLatsMethod(highLatitude);
-    salats->getDatePrayerTimes(year,month,day,latitude,longitude,timezone,salatTimes);
+    salatTimes = salats->getDatePrayerTimes(year,month,day,latitude,longitude,timezone);
 
 	int numElements = sizeof(salatTimes)/sizeof(salatTimes[0]);
-	/*for (int i = 0; i < numElements; i++) 
-    	cout << salatTimes[i] << "\n";*/
+	for (int i = 0; i < 7; i++) 
+    	cout << salatTimes[i] << "\n";
+    delete[] salatTimes;
     return 0;
 }

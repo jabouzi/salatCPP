@@ -39,7 +39,7 @@ public:
     Salat();
     ~Salat();
     
-    void getDatePrayerTimes(int, int , int , double , double , double, string * prayerTimes);
+    string* getDatePrayerTimes(int, int , int , double , double , double);
     
     
     // set the calculation method
@@ -129,26 +129,26 @@ public:
     
     
     // compute prayer times at given julian date
-    void computeTimes(double*);
+    void computeTimes();
     
     
     // compute prayer times at given julian date
-    void computeDayTimes(string *prayerTimes);
+    void computeDayTimes();
     
     
     
     // adjust times in a prayer time array
-    void adjustTimes(double*);
+    void adjustTimes();
     
     
     
     // convert times array to given time format
-    void adjustTimesFormat(double*, string *prayerTimes);
+    void adjustTimesFormat();
     
     
     
     // adjust Fajr, Isha and Maghrib for locations in higher latitudes
-    void adjustHighLatTimes(double*);
+    void adjustHighLatTimes();
     
     
     
@@ -267,6 +267,7 @@ private:
     //Ui::SalatClass ui;
     // Calculation Methods
     double * times;
+    string* prayerTimes;
     double PI;
     
     int Jafari;    // Ithna Ashari
