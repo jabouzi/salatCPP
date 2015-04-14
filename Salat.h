@@ -40,7 +40,7 @@ public:
     Salat();
     ~Salat();
     
-    string* getDatePrayerTimes(int, int , int , double , double , double);
+    void getDatePrayerTimes(int, int , int , double , double , double, string*);
     
     
     // set the calculation method
@@ -265,10 +265,9 @@ public:
     
     
 private:
-    //Ui::SalatClass ui;
-    // Calculation Methods
-    double * times;
-    string* prayerTimes;
+    double times [7] = {0,0,0,0,0,0,0};
+    string prayerTimes [7] = {"","","","","","",""};
+
     double PI;
     
     int Jafari;    // Ithna Ashari

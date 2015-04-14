@@ -137,19 +137,15 @@ Salat::Salat()
     methodParams[7][2] = 4.5;
     methodParams[7][3] = 0.0;
     methodParams[7][4] = 15.0;
-    times = new double[7];
-    prayerTimes = new string[7];
 }
 
 Salat::~Salat()
 {
 	cout << "DELETING MEMORIES\n";
-    delete[] times;
-    delete[] prayerTimes;
 }
 
 // return prayer times for a given date
-string* Salat::getDatePrayerTimes(int year, int month, int day, double latitude, double longitude, double timeZone)
+void Salat::getDatePrayerTimes(int year, int month, int day, double latitude, double longitude, double timeZone, string* salatTimes)
 {
     lat = latitude;
     lng = longitude;
@@ -158,7 +154,10 @@ string* Salat::getDatePrayerTimes(int year, int month, int day, double latitude,
     JDate = julianDate(year, month, day)- longitude/ (15* 24);
     computeDayTimes();
 
-    return prayerTimes;
+    for(int i = 0; i < 7; i++)
+    {
+		salatTimes[i] = prayerTimes[i];
+	}
 }
 
 // set the calculation method
