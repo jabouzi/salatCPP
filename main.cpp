@@ -26,6 +26,8 @@ int main()
 
 	for (int i = 0; i < 7; i++) 
     	cout << salatTimes[i] << "\n";
-
+	delete now;
     return 0;
 }
+
+
